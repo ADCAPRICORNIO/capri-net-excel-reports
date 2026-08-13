@@ -167,8 +167,7 @@ public class SimpleExcelReportExporter {
                                 cellData.setCellValue(dateValue);
                             }
                             case DataTypes.DATETIME -> {
-                                DateTimeFormatter formatter =
-                                        DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                                DateTimeFormatter formatter = DateHelper.getDateTimeFormatter(currentValue.toString());
                                 LocalDateTime dateTimeValue =
                                         LocalDateTime.parse(currentValue.toString(), formatter);
                                 cellData.setCellValue(currentValue.toString());

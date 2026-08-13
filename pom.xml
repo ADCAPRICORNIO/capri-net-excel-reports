@@ -5,7 +5,7 @@
     <groupId>com.adcapricornio</groupId>
     <artifactId>capri-net-excel-reports</artifactId>
     <packaging>jar</packaging>
-    <version>1.4.1</version>
+    <version>1.4.3</version>
     <url>http://maven.apache.org</url>
     <name>capri-net-excel-reports</name>
 
