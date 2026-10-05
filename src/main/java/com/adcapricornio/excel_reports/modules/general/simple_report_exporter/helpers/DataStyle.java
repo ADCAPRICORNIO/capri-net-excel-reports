@@ -22,6 +22,81 @@ public class DataStyle {
         return style;
     }
 
+    public static CellStyle getFooterCellStyle(Workbook workbook) {
+        CellStyle style = workbook.createCellStyle();
+
+        // SET TEXT ALIGN
+        style.setAlignment(HorizontalAlignment.CENTER);
+        style.setVerticalAlignment(VerticalAlignment.CENTER);
+
+        // SET FONT WEIGHT
+        Font font = workbook.createFont();
+        font.setBold(true);
+        style.setFont(font);
+
+        // SET BACKGROUND
+        style.setFillForegroundColor(IndexedColors.PALE_BLUE.getIndex());
+        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+        // SET BORDER
+        style.setBorderTop(BorderStyle.THIN);
+        style.setBorderLeft(BorderStyle.THIN);
+        style.setBorderRight(BorderStyle.THIN);
+        style.setBorderBottom(BorderStyle.THIN);
+
+        return style;
+    }
+
+    public static CellStyle getFooterLeftCellStyle(Workbook workbook) {
+        CellStyle style = workbook.createCellStyle();
+
+        // SET TEXT ALIGN
+        style.setAlignment(HorizontalAlignment.LEFT);
+        style.setVerticalAlignment(VerticalAlignment.CENTER);
+
+        // SET FONT WEIGHT
+        Font font = workbook.createFont();
+        font.setBold(true);
+        style.setFont(font);
+
+        // SET BACKGROUND
+        style.setFillForegroundColor(IndexedColors.PALE_BLUE.getIndex());
+        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+        // SET BORDER
+        style.setBorderTop(BorderStyle.THIN);
+        style.setBorderLeft(BorderStyle.THIN);
+        style.setBorderRight(BorderStyle.THIN);
+        style.setBorderBottom(BorderStyle.THIN);
+
+        return style;
+    }
+
+    public static CellStyle getFooterRightCellStyle(Workbook workbook) {
+        CellStyle style = workbook.createCellStyle();
+
+        // SET TEXT ALIGN
+        style.setAlignment(HorizontalAlignment.RIGHT);
+        style.setVerticalAlignment(VerticalAlignment.CENTER);
+
+        // SET FONT WEIGHT
+        Font font = workbook.createFont();
+        font.setBold(true);
+        style.setFont(font);
+
+        // SET BACKGROUND
+        style.setFillForegroundColor(IndexedColors.PALE_BLUE.getIndex());
+        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+        // SET BORDER
+        style.setBorderTop(BorderStyle.THIN);
+        style.setBorderLeft(BorderStyle.THIN);
+        style.setBorderRight(BorderStyle.THIN);
+        style.setBorderBottom(BorderStyle.THIN);
+
+        return style;
+    }
+
     public static CellStyle getDataStyle(Workbook workbook) {
         CellStyle style = workbook.createCellStyle();
 

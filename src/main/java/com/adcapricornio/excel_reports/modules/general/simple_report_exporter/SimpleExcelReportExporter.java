@@ -1,6 +1,7 @@
 package com.adcapricornio.excel_reports.modules.general.simple_report_exporter;
 
 import com.adcapricornio.excel_reports.common.constants.DataTypes;
+import com.adcapricornio.excel_reports.common.constants.TextAlign;
 import com.adcapricornio.excel_reports.common.exceptions.ExcelReportException;
 import com.adcapricornio.excel_reports.common.helpers.DateHelper;
 import com.adcapricornio.excel_reports.modules.general.simple_report_exporter.helpers.*;
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Optional;
 
 public class SimpleExcelReportExporter {
 
@@ -133,16 +135,31 @@ public class SimpleExcelReportExporter {
             /*===================================*/
 
             DataStyleCache dataStyle = new DataStyleCache(workbook);
+            var indexStyle = DataStyle.getIndexCellStyle(workbook);
+            var footerStyle = DataStyle.getFooterCellStyle(workbook);
+            var footerLeftStyle = DataStyle.getFooterLeftCellStyle(workbook);
+            var footerRightStyle = DataStyle.getFooterRightCellStyle(workbook);
 
             for (int i = 0; i < data.getData().getRows().size(); i++) {
                 var currentRow = data.getData().getRows().get(i);
 
+                Integer footer = 0;
+                if (currentRow.getMetadata() != null && currentRow.getMetadata().getFooter() != null) {
+                    footer = currentRow.getMetadata().getFooter();
+                }
+
                 currentRowNumber += 1;
                 Row dataSection = sheet.createRow(currentRowNumber);
 
-                Cell cellIndexData = dataSection.createCell(0);
-                cellIndexData.setCellValue(i + 1);
-                cellIndexData.setCellStyle(DataStyle.getIndexCellStyle(workbook));
+                if (footer.equals(1)) {
+                    Cell cellIndexData = dataSection.createCell(0);
+                    cellIndexData.setCellValue("TOTAL");
+                    cellIndexData.setCellStyle(footerStyle);
+                } else {
+                    Cell cellIndexData = dataSection.createCell(0);
+                    cellIndexData.setCellValue(i + 1);
+                    cellIndexData.setCellStyle(indexStyle);
+                }
 
                 for (int x = 0; x < currentRow.getItems().size(); x++) {
                     Cell cellData = dataSection.createCell(x + 1);
@@ -176,7 +193,11 @@ public class SimpleExcelReportExporter {
                         }
                     }
 
-                    cellData.setCellStyle(dataStyle.getStyle(dataType, textAlign, true, true, backgroundColor));
+                    if (footer.equals(1)) {
+                        cellData.setCellStyle((textAlign.equals(TextAlign.LEFT) ? footerLeftStyle : (textAlign.equals(TextAlign.RIGHT) ? footerRightStyle : footerStyle)));
+                    } else {
+                        cellData.setCellStyle(dataStyle.getStyle(dataType, textAlign, true, true, backgroundColor));
+                    }
 
                 }
             }
