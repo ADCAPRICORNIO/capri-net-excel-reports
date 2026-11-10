@@ -65,6 +65,7 @@ public class MultiSheetExcelReportInput {
     @NoArgsConstructor
     public static class Metadata {
         private String backgroundColor;
+        private Integer footer;
     }
 
     @Getter
